@@ -7,5 +7,5 @@ BERGER Rémi
 # ERREUR 
 
 - Actuellement il y a des problèmes de libération de mémoire.
-- Pas encore de système de tire 
+- Pas encore de système de tir
 
