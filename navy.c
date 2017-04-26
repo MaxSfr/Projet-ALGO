@@ -21,7 +21,7 @@ struct Mine{
 };
 
 void positionMine(struct Mine *self){
-  self->data = malloc (sizeof(size_t));
+  self->data = malloc (sizeof(struct position)*5);
 
   self->data[0].positionY = 1;
   self->data[0].positionX = 'A';
@@ -57,6 +57,8 @@ struct Equipe {
 };
 
 void positionInitialiser(struct Equipe *self){
+  self->data = malloc (sizeof(struct Bateau)*5);
+  
   //on défini la postion du porte avions ainsi que ca taille
   self->data[0].tailleBateau = PA;
   self->data[0].positionTop.positionY = 2;
