@@ -129,15 +129,79 @@ int main(){
     		printf("%c%d%c%d\n",NotreEquipe.data[i].positionTop.positionX,NotreEquipe.data[i].positionTop.positionY,NotreEquipe.data[i].positionBottom.positionX,NotreEquipe.data[i].positionBottom.positionY );
     
     		fgets(buffer, BUFSIZE, stdin);
-		assert(strcmp(buffer, "OK\n") == 0);
+		//assert(strcmp(buffer, "OK\n") == 0);
   	}
 
-	/*for (;;) {
+	int count = 0;
+	int countLettre = 'A';	
+
+	for (;;) {
     		printf("SHOOT\n"); // or POOL or MOVE
-    		printf("D2\n");
+    		printf("%c%d\n",countLettre,count);
     		fgets(buffer, BUFSIZE, stdin);
     		fgets(buffer, BUFSIZE, stdin); // NOTHING or ATTACK
-  	}*/
+		
+		
+		if(buffer == "MISS\n"){ /* <-- Si tu arrive a comprendre ce warning. En gros si je vais un printf 
+					je recois un mot MISS ou ATTACK ... Tout dépend la réponse du serveur par 
+					contre je ne comprend pas pourquoi ca ne marche pas dans un si.
+					*/
+		
+		}
+		
+		count++;
+		if(count == 10){
+			if(countLettre == 'A'){
+				countLettre = 'B';
+			}
+			else {
+				if(countLettre == 'B'){
+					countLettre = 'C';
+				}
+				else{
+					if(countLettre == 'C'){
+						countLettre = 'D';
+					}
+					else{
+						if(countLettre == 'D'){
+							countLettre = 'E';
+						}
+						else {
+							if(countLettre == 'E'){
+								countLettre = 'F';
+							}
+							else {
+								if(countLettre == 'F'){
+									countLettre = 'G';
+								}
+								else{
+									if(countLettre == 'G'){
+										countLettre = 'H';
+									}
+									else{
+										if(countLettre == 'H'){
+											countLettre = 'I';
+										}
+										else{
+											if(countLettre == 'I'){
+												countLettre = 'J';
+											}
+											else{
+												if(countLettre == 'J'){
+													countLettre = 'A';
+												}
+											}
+										}
+									}
+								}
+							}	
+						}
+					}
+				}
+			}
+		count = 0;
+		}
+  	}
 	
 	
 
