@@ -142,7 +142,7 @@ int main(){
     		fgets(buffer, BUFSIZE, stdin); // NOTHING or ATTACK
 		
 		
-		if(buffer == "MISS\n"){ /* <-- Si tu arrive a comprendre ce warning. En gros si je vais un printf 
+		if(strstr(buffer,"MISS\n")!=NULL){ /* <-- Si tu arrive a comprendre ce warning. En gros si je vais un printf 
 					je recois un mot MISS ou ATTACK ... Tout dépend la réponse du serveur par 
 					contre je ne comprend pas pourquoi ca ne marche pas dans un si.
 					*/
