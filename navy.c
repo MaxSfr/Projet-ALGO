@@ -236,7 +236,7 @@ int main(){
     		fgets(buffer, BUFSIZE, stdin); // NOTHING or ATTACK
 		
 		
-		if(strstr(buffer,"HIT\n")==NULL){ 	//Si on touche alors on fait une autre action
+		if(strcmp(buffer,"HIT\n")==0){ 	//Si on touche alors on fait une autre action
 			tireAutour(count,countLettre);
 		}
 		else {					//Sinon on continue de tirer 
