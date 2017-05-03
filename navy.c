@@ -104,6 +104,96 @@ void positionInitialiser(struct Equipe *self){
  	self->capacity = 5;
 };
 
+void tireAGauche(int position_Y, char position_X){
+	char buffer[BUFSIZE];
+	
+
+	position_X--;
+	if(position_X >= 'A'){
+		
+	
+		
+		printf("SHOOT\n"); // or POOL or MOVE
+	    	printf("%c%d\n",position_X,position_Y);
+	   	fgets(buffer, BUFSIZE, stdin);
+	    	fgets(buffer, BUFSIZE, stdin); // NOTHING or ATTACK
+		
+		
+		if(strstr(buffer,"HIT\n")!=NULL){ 
+			tireAGauche(position_Y,position_X);
+		}
+	}
+};
+
+void tireADroite(int position_Y, char position_X){
+	char buffer[BUFSIZE];
+	
+
+	position_X++;
+	if(position_X <= 'J'){
+		
+	
+		
+	printf("SHOOT\n"); // or POOL or MOVE
+    	printf("%c%d\n",position_X,position_Y);
+   	fgets(buffer, BUFSIZE, stdin);
+    	fgets(buffer, BUFSIZE, stdin); // NOTHING or ATTACK
+		
+		
+	if(strstr(buffer,"HIT\n")!=NULL){ 
+		tireADroite(position_Y,position_X);
+	}
+	}
+};
+
+void tireEnHaut(int position_Y, char position_X){
+	char buffer[BUFSIZE];
+
+	position_Y--;
+	if(position_Y >= 0){
+		
+	
+	printf("SHOOT\n"); // or POOL or MOVE
+    	printf("%c%d\n",position_X,position_Y);
+   	fgets(buffer, BUFSIZE, stdin);
+    	fgets(buffer, BUFSIZE, stdin); // NOTHING or ATTACK
+		
+		
+	if(strstr(buffer,"HIT\n")!=NULL){ 
+		tireEnHaut(position_Y,position_X);
+	}
+	}
+};
+
+void tireEnBas(int position_Y, char position_X){
+	char buffer[BUFSIZE];
+	
+
+	position_Y++;
+	if(position_Y <= 9){	
+		printf("SHOOT\n"); // or POOL or MOVE
+	    	printf("%c%d\n",position_X,position_Y);
+	   	fgets(buffer, BUFSIZE, stdin);
+	    	fgets(buffer, BUFSIZE, stdin); // NOTHING or ATTACK
+		
+		
+		if(strstr(buffer,"HIT\n")!=NULL){ 
+			tireEnBas(position_Y,position_X);
+		}
+	}
+};
+
+
+
+void tireAutour(int position_Y, char position_X){	//fonctionne qui généralise tout
+	tireAGauche( position_Y, position_X);	
+	tireADroite( position_Y, position_X);	
+	tireEnHaut( position_Y, position_X);
+	tireEnBas( position_Y, position_X);
+};
+
+
+
 
 int main(){
   	struct Equipe NotreEquipe;
@@ -132,25 +222,46 @@ int main(){
 		//assert(strcmp(buffer, "OK\n") == 0);
   	}
 
-	int count = 0;
+	int count = 1;
 	int countLettre = 'A';	
 
 	for (;;) {
+		if(count == 10){
+			count = 0;
+		}
+		
     		printf("SHOOT\n"); // or POOL or MOVE
     		printf("%c%d\n",countLettre,count);
     		fgets(buffer, BUFSIZE, stdin);
     		fgets(buffer, BUFSIZE, stdin); // NOTHING or ATTACK
 		
 		
-		if(strstr(buffer,"MISS\n")!=NULL){ /* <-- Si tu arrive a comprendre ce warning. En gros si je vais un printf 
-					je recois un mot MISS ou ATTACK ... Tout dépend la réponse du serveur par 
-					contre je ne comprend pas pourquoi ca ne marche pas dans un si.
-					*/
-		
+		if(strstr(buffer,"HIT\n")==NULL){ 	//Si on touche alors on fait une autre action
+			tireAutour(count,countLettre);
 		}
+		else {					//Sinon on continue de tirer 
+			if(countLettre == 'I'){
+				countLettre = 'A';
+				count++;
+			}
+			else {
+				if( countLettre == 'J'){
+					countLettre = 'B';
+					count++;
+				}
+				else {
+					countLettre+=2;
+				}
+			}
+		}
+
+	
 		
-		count++;
-		if(count == 10){
+
+		
+
+
+		/*if(count == 10){
 			if(countLettre == 'A'){
 				countLettre = 'B';
 			}
@@ -200,7 +311,7 @@ int main(){
 				}
 			}
 		count = 0;
-		}
+		}*/
   	}
 	
 	
