@@ -29,20 +29,20 @@ struct Mine{
 void positionMine(struct Mine *self){
   	self->data = malloc (sizeof(struct position)*5);
 
-  	self->data[0].positionY = 1;
-  	self->data[0].positionX = 'A';
+  	self->data[0].positionY = 8;
+  	self->data[0].positionX = 'B';
 
-  	self->data[1].positionY = 1;
-  	self->data[1].positionX = 'A';
+  	self->data[1].positionY = 7;
+  	self->data[1].positionX = 'E';
 
-  	self->data[2].positionY = 1;
-  	self->data[2].positionX = 'A';
+  	self->data[2].positionY = 8;
+  	self->data[2].positionX = 'F';
 
-  	self->data[3].positionY = 1;
-  	self->data[3].positionX = 'A';
+  	self->data[3].positionY = 7;
+  	self->data[3].positionX = 'G';
 
-  	self->data[4].positionY = 1;
-  	self->data[4].positionX = 'A';
+  	self->data[4].positionY = 8;
+  	self->data[4].positionX = 'H';
 
   	self->size = 5;     //A chauqe fois qu'une mine est détruite alors on enlève 1 à la taille
   	self->capacity = 5; //On ne peut avoir seulement 5 mines, la capacité ne changera jamais
@@ -104,92 +104,121 @@ void positionInitialiser(struct Equipe *self){
  	self->capacity = 5;
 };
 
-void tireAGauche(int position_Y, char position_X){
-	char buffer[BUFSIZE];
+void tireAGauche(int position_Y, char position_X,char* buffer){
+	
 	
 
 	position_X--;
 	if(position_X >= 'A'){
-		
-	
-		
 		printf("SHOOT\n"); // or POOL or MOVE
 	    	printf("%c%d\n",position_X,position_Y);
 	   	fgets(buffer, BUFSIZE, stdin);
-	    	fgets(buffer, BUFSIZE, stdin); // NOTHING or ATTACK
+	    	
 		
 		
-		if(strstr(buffer,"HIT\n")!=NULL){ 
-			tireAGauche(position_Y,position_X);
+		if(strcmp(buffer,"HIT\n")==0){ 
+			tireAGauche(position_Y,position_X,buffer);
+		fgets(buffer, BUFSIZE, stdin); // NOTHING or ATTACK
+		if(strcmp(buffer,"ATTACK\n")==0){
+				fgets(buffer, BUFSIZE, stdin);
+		}
+		}
+		else{
+		fgets(buffer, BUFSIZE, stdin); // NOTHING or ATTACK
+		if(strcmp(buffer,"ATTACK\n")==0){
+			fgets(buffer, BUFSIZE, stdin);
+		}
 		}
 	}
 };
 
-void tireADroite(int position_Y, char position_X){
-	char buffer[BUFSIZE];
+void tireADroite(int position_Y, char position_X,char* buffer){
+	
 	
 
 	position_X++;
-	if(position_X <= 'J'){
+	if(position_X <= 'J'){		
+		printf("SHOOT\n"); // or POOL or MOVE
+	    	printf("%c%d\n",position_X,position_Y);
+	   	fgets(buffer, BUFSIZE, stdin);
+	    
 		
+		
+		if(strcmp(buffer,"HIT\n")==0){ 
+			tireADroite(position_Y,position_X,buffer);
+		fgets(buffer, BUFSIZE, stdin); // NOTHING or ATTACK
+		if(strcmp(buffer,"ATTACK\n")==0){
+				fgets(buffer, BUFSIZE, stdin);
+		}
+		}
+		else{
+		fgets(buffer, BUFSIZE, stdin); // NOTHING or ATTACK
+		if(strcmp(buffer,"ATTACK\n")==0){
+			fgets(buffer, BUFSIZE, stdin);
+		}
+		}
 	
-		
-	printf("SHOOT\n"); // or POOL or MOVE
-    	printf("%c%d\n",position_X,position_Y);
-   	fgets(buffer, BUFSIZE, stdin);
-    	fgets(buffer, BUFSIZE, stdin); // NOTHING or ATTACK
-		
-		
-	if(strstr(buffer,"HIT\n")!=NULL){ 
-		tireADroite(position_Y,position_X);
-	}
 	}
 };
 
-void tireEnHaut(int position_Y, char position_X){
-	char buffer[BUFSIZE];
+void tireEnHaut(int position_Y, char position_X,char* buffer){
 
 	position_Y--;
 	if(position_Y >= 0){
 		
-	
 	printf("SHOOT\n"); // or POOL or MOVE
     	printf("%c%d\n",position_X,position_Y);
-   	fgets(buffer, BUFSIZE, stdin);
-    	fgets(buffer, BUFSIZE, stdin); // NOTHING or ATTACK
+   	fgets(buffer, BUFSIZE, stdin);	
 		
-		
-	if(strstr(buffer,"HIT\n")!=NULL){ 
-		tireEnHaut(position_Y,position_X);
+	if(strcmp(buffer,"HIT\n")==0){ 
+		tireEnHaut(position_Y,position_X,buffer);
+		fgets(buffer, BUFSIZE, stdin); // NOTHING or ATTACK
+		if(strcmp(buffer,"ATTACK\n")==0){
+			fgets(buffer, BUFSIZE, stdin);
+		}
+	}
+	else{
+		fgets(buffer, BUFSIZE, stdin); // NOTHING or ATTACK
+		if(strcmp(buffer,"ATTACK\n")==0){
+			fgets(buffer, BUFSIZE, stdin);
+		}
 	}
 	}
 };
 
-void tireEnBas(int position_Y, char position_X){
-	char buffer[BUFSIZE];
+void tireEnBas(int position_Y, char position_X,char* buffer){
 	
-
 	position_Y++;
 	if(position_Y <= 9){	
 		printf("SHOOT\n"); // or POOL or MOVE
 	    	printf("%c%d\n",position_X,position_Y);
 	   	fgets(buffer, BUFSIZE, stdin);
-	    	fgets(buffer, BUFSIZE, stdin); // NOTHING or ATTACK
+	    
 		
 		
-		if(strstr(buffer,"HIT\n")!=NULL){ 
-			tireEnBas(position_Y,position_X);
+		if(strcmp(buffer,"HIT\n")==0){ 
+			tireEnBas(position_Y,position_X,buffer);
+			fgets(buffer, BUFSIZE, stdin); // NOTHING or ATTACK
+			if(strcmp(buffer,"ATTACK\n")==0){
+				fgets(buffer, BUFSIZE, stdin);
+			}
+		}
+		else{
+			fgets(buffer, BUFSIZE, stdin); // NOTHING or ATTACK
+			if(strcmp(buffer,"ATTACK\n")==0){
+				fgets(buffer, BUFSIZE, stdin);
+			}
 		}
 	}
 };
 
 
 
-void tireAutour(int position_Y, char position_X){	//fonctionne qui généralise tout
-	tireAGauche( position_Y, position_X);	
-	tireADroite( position_Y, position_X);	
-	tireEnHaut( position_Y, position_X);
-	tireEnBas( position_Y, position_X);
+void tireAutour(int position_Y, char position_X,char* buffer){	//fonctionne qui généralise tout
+	tireAGauche( position_Y, position_X,buffer);	
+	tireADroite( position_Y, position_X,buffer);	
+	tireEnHaut( position_Y, position_X,buffer);
+	tireEnBas( position_Y, position_X,buffer);
 };
 
 
@@ -198,6 +227,8 @@ void tireAutour(int position_Y, char position_X){	//fonctionne qui généralise 
 int main(){
   	struct Equipe NotreEquipe;
   	struct Mine NosMine;
+	FILE* fd = NULL;
+	fd = fopen("logJoueur.txt","w");
 
   	setbuf(stdout, NULL);
   	char buffer[BUFSIZE];
@@ -206,23 +237,29 @@ int main(){
   	positionMine(&NosMine);
   	positionInitialiser(&NotreEquipe);
 
-  	printf("C2\n");//Ne pas oublier de faire la lecture de nos mines et pas de celle ci
-  	printf("H2\n");
-  	printf("C7\n");
-  	printf("H7\n");
-  	printf("E5\n");
+	fprintf(fd,"Positions Mines: \n");
+	
+  	for(size_t y = 0; y < NosMine.size;y+=1){
+		printf("%c%d\n",NosMine.data[y].positionX, NosMine.data[y].positionY);
+		fprintf(fd,"%c%d\n",NosMine.data[y].positionX, NosMine.data[y].positionY);
+	}
 
 	
+	fprintf(fd,"\nPositions Bateaux: \n");
 
   	//affichage des coordonnées des bateaux
   	for(size_t i = 0; i < NotreEquipe.size ; i+=1){
     		printf("%c%d%c%d\n",NotreEquipe.data[i].positionTop.positionX,NotreEquipe.data[i].positionTop.positionY,NotreEquipe.data[i].positionBottom.positionX,NotreEquipe.data[i].positionBottom.positionY );
+
+		fprintf(fd,"%c%d%c%d\n",NotreEquipe.data[i].positionTop.positionX,NotreEquipe.data[i].positionTop.positionY,NotreEquipe.data[i].positionBottom.positionX,NotreEquipe.data[i].positionBottom.positionY );
     
     		fgets(buffer, BUFSIZE, stdin);
 		//assert(strcmp(buffer, "OK\n") == 0);
   	}
+	
+	fclose(fd);
 
-	int count = 1;
+	int count = 0;
 	int countLettre = 'A';	
 
 	for (;;) {
@@ -230,91 +267,50 @@ int main(){
 			count = 0;
 		}
 		
+
     		printf("SHOOT\n"); // or POOL or MOVE
     		printf("%c%d\n",countLettre,count);
     		fgets(buffer, BUFSIZE, stdin);
-    		fgets(buffer, BUFSIZE, stdin); // NOTHING or ATTACK
-		
-		
+
+
 		if(strcmp(buffer,"HIT\n")==0){ 	//Si on touche alors on fait une autre action
-			tireAutour(count,countLettre);
-		}
-		else {					//Sinon on continue de tirer 
-			if(countLettre == 'I'){
-				countLettre = 'A';
-				count++;
-			}
-			else {
-				if( countLettre == 'J'){
-					countLettre = 'B';
-					count++;
-				}
-				else {
-					countLettre+=2;
-				}
+			tireAutour(count,countLettre,buffer);
+			fgets(buffer, BUFSIZE, stdin);
+ 			if(strcmp(buffer,"ATTACK\n")==0){
+				fgets(buffer, BUFSIZE, stdin);
 			}
 		}
 
-	
-		
-
-		
-
-
-		/*if(count == 10){
-			if(countLettre == 'A'){
+							//Sinon on continue de tirer 
+		if(countLettre == 'I'){
+			countLettre = 'A';
+			count++;
+			fgets(buffer, BUFSIZE, stdin);
+			if(strcmp(buffer,"ATTACK\n")==0){
+				fgets(buffer, BUFSIZE, stdin);
+			}
+		}
+		else {
+			if( countLettre == 'J'){
 				countLettre = 'B';
+				count++;
+				fgets(buffer, BUFSIZE, stdin);
+				if(strcmp(buffer,"ATTACK\n")==0){
+					fgets(buffer, BUFSIZE, stdin);
+				}
 			}
 			else {
-				if(countLettre == 'B'){
-					countLettre = 'C';
-				}
-				else{
-					if(countLettre == 'C'){
-						countLettre = 'D';
-					}
-					else{
-						if(countLettre == 'D'){
-							countLettre = 'E';
-						}
-						else {
-							if(countLettre == 'E'){
-								countLettre = 'F';
-							}
-							else {
-								if(countLettre == 'F'){
-									countLettre = 'G';
-								}
-								else{
-									if(countLettre == 'G'){
-										countLettre = 'H';
-									}
-									else{
-										if(countLettre == 'H'){
-											countLettre = 'I';
-										}
-										else{
-											if(countLettre == 'I'){
-												countLettre = 'J';
-											}
-											else{
-												if(countLettre == 'J'){
-													countLettre = 'A';
-												}
-											}
-										}
-									}
-								}
-							}	
-						}
-					}
+				countLettre+=2;
+				fgets(buffer, BUFSIZE, stdin);
+				if(strcmp(buffer,"ATTACK\n")==0){
+					fgets(buffer, BUFSIZE, stdin);
 				}
 			}
-		count = 0;
-		}*/
-  	}
-	
-	
+		}
+		
+		
+		
+  	}	
 
   	return EXIT_SUCCESS;
 }
